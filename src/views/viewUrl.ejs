@@ -1,0 +1,40 @@
+<div class="container mt-5">
+  <%- include('partials/flashMessages') %>
+  <div class="row">
+    <a href="/">
+      <button class="btn btn-primary">Go back</button>
+    </a>
+  </div>
+
+    <dl class="row mt-5">
+      <dt class="col-sm-3">
+        Full URL:
+      </dt>
+      <dd class="col-sm-9"><a href="<%= shortUrl.full %>"><%= shortUrl.full %></a></dd>
+      <dt class="col-sm-3">
+        Short URL:
+      </dt>
+      <dd class="col-sm-9"><a href="/<%= shortUrl.short %>" id="shortUrl"><%= shortUrl.short %></a></dd>
+      <dt class="col-sm-3">
+        Clicks:
+      </dt>
+      <dd class="col-sm-9"><%= shortUrl.clicks %></dd>
+      <dt class="col-sm-3">
+        <button id="copyShortUrlBtn" class="btn btn-success">Copy to clipboard</button>
+      </dt>
+    </dl>
+  </div>
+</div>
+
+<script>
+  const shortUrlLink = document.getElementById('shortUrl')
+  const copyShortUrlBtn = document.getElementById('copyShortUrlBtn')
+
+  function copyShortUrl() {
+    const copyText = document.getElementById("shortUrl");
+    navigator.clipboard.writeText(`http://localhost:3000/${copyText.innerHTML}`);
+    alert('Short URL copied to the clipboard!')
+  }
+
+  copyShortUrlBtn.addEventListener('click', copyShortUrl)
+</script>

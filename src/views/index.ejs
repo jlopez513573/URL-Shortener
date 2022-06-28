@@ -1,0 +1,49 @@
+<div class="container mt-5">
+  <%- include('partials/flashMessages') %>
+  <h1>URL Shrinker</h1>
+  <form action="/shrinkUrl" method="post" class="my-4 form-inline">
+    <div class="row">
+      <div class="col-10">
+        <input
+          placeholder="URL"
+          required
+          type="string"
+          class="form-control"
+          name="fullUrl"
+          id="fullUrl"
+        />
+      </div>
+      <button class="btn btn-success col-auto" type="submit">Shrink</button>
+    </div>
+  </form>
+
+  <table class="table table-striped-columns table-responsive mt-5">
+    <thead>
+      <tr>
+        <th>Full URL</th>
+        <th>Short URL</th>
+        <th>Clicks</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% shortUrls.forEach(shortUrl => { %>
+      <tr>
+        <td>
+          <a href="<%= shortUrl.full %>"><%= shortUrl.full %></a>
+        </td>
+        <td>
+          <a href="/<%= shortUrl.short %>"><%= shortUrl.short %></a>
+        </td>
+        <td><%= shortUrl.clicks %></td>
+        <td>
+          <a href="/deleteUrl/<%= shortUrl.id %>" class="btn btn-danger"
+            >Delete</a
+          >
+          <a href="/viewUrl/<%= shortUrl.id %>" class="btn btn-primary">View</a>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
